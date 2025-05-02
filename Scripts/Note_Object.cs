@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Note_Object : MonoBehaviour
 {
+    public GameObject onCollectEffect;
     public bool canBePressed;
     public KeyCode downKey;
     public KeyCode leftKey;
@@ -17,11 +18,13 @@ public class Note_Object : MonoBehaviour
      if(Input.GetKeyDown(leftKey)){
         if(canBePressed){
             gameObject.SetActive(false);
+            Instantiate(onCollectEffect, transform.position, transform.rotation);
         }
      }   
      if(Input.GetKeyDown(downKey)){
         if(canBePressed){
             gameObject.SetActive(false);
+            Instantiate(onCollectEffect, transform.position, transform.rotation);
         }
      }   
     }

@@ -16,13 +16,7 @@ public class Beat_Scroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!hasStarted){
-            if(Input.anyKey)
-            {
-                hasStarted = true;
-            }
-        }
-        else{
+        if(hasStarted){
             transform.position -= new Vector3(beatTempo* Time.deltaTime, 0f, 0f);
         }
     }

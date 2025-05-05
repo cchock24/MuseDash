@@ -5,8 +5,8 @@ public class Song_Manager : MonoBehaviour
 {
     public AudioSource song;
     public bool startPlaying;
-    public Beat_Scroller BS;
-
+    public Beat_Scroller BS_Ground;
+    public Beat_Scroller BS_Fly;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,7 +19,8 @@ public class Song_Manager : MonoBehaviour
         if(!startPlaying){
             if(Input.anyKeyDown){
                 startPlaying = true;
-                BS.hasStarted = true;
+                BS_Ground.hasStarted = true;
+                BS_Fly.hasStarted = true;
                 song.Play();
             }
         }

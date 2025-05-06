@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d98ed3c4a904f6d92f13658a345396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: SongSelection
+  sceneToLoad: SongSolection
 --- !u!1 &1053248464
 GameObject:
   m_ObjectHideFlags: 0

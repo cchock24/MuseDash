@@ -25,7 +25,9 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Settings.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/SongSelection.unity
+    m_path: Assets/Scenes/SongScreen.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/SongSolection.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

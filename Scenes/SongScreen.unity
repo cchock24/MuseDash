@@ -2985,7 +2985,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a43dcd80fa046f8b6bfdd654b632bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onCollectEffect: {fileID: 0}
+  onCollectEffect: {fileID: 9163842254569548763, guid: 500a6feca1b4b4228a758f931741b37f, type: 3}
+  partner: {fileID: 2097034828}
   canBePressed: 0
   downKey: 273
   leftKey: 275
@@ -3001,7 +3002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07dc4901f8bf84e05bfc1ee5e85b2adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatTempo: 120
+  beatTempo: 155
   hasStarted: 0
   beatSpeed: 20
   actualSpeed: 0
@@ -4205,6 +4206,7 @@ GameObject:
   - component: {fileID: 2058338406}
   - component: {fileID: 2058338405}
   - component: {fileID: 2058338407}
+  - component: {fileID: 2058338408}
   m_Layer: 0
   m_Name: SongManager
   m_TagString: Untagged
@@ -4232,6 +4234,8 @@ MonoBehaviour:
   notesHit: 0
   notesMissed: 0
   comboText: {fileID: 475355358}
+  topEnemy: {fileID: 1429732089}
+  botEnemy: {fileID: 2097034828}
   creator: {fileID: 2058338407}
 --- !u!4 &2058338406
 Transform:
@@ -4271,8 +4275,26 @@ MonoBehaviour:
   - 1
   - 3
   - 5
-  TopnoteTimesFile: {fileID: 0}
-  BotnoteTimesFile: {fileID: 0}
+  TopnoteTimesFile: {fileID: 4900000, guid: 9ffd36847478844848c25deef50dbfda, type: 3}
+  BotnoteTimesFile: {fileID: 4900000, guid: 778df1ad0edfe42998f89a9e86490c94, type: 3}
+  offset: 0
+--- !u!114 &2058338408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058338404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6426c47e377a64e449440cc99fddc5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerDuration: 100000
+  topTime: []
+  botTime: []
+  filePathTop: 
+  filePathBot: 
 --- !u!1 &2084398589
 GameObject:
   m_ObjectHideFlags: 0
@@ -4441,6 +4463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCollectEffect: {fileID: 9163842254569548763, guid: 500a6feca1b4b4228a758f931741b37f, type: 3}
+  partner: {fileID: 1429732089}
   canBePressed: 0
   downKey: 274
   leftKey: 276
@@ -4456,7 +4479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07dc4901f8bf84e05bfc1ee5e85b2adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatTempo: 120
+  beatTempo: 155
   hasStarted: 0
   beatSpeed: 20
   actualSpeed: 0

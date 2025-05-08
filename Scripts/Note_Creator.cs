@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Note_Creator : MonoBehaviour
 {
@@ -15,10 +16,11 @@ public class Note_Creator : MonoBehaviour
     public float[] testTime = new float[3] {1f,3f,5f};
     public TextAsset TopnoteTimesFile;
     public TextAsset BotnoteTimesFile;
+    public float offset;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-    
+        LoadNoteTimes();
     }
 
     // Update is called once per frame
@@ -41,7 +43,6 @@ public class Note_Creator : MonoBehaviour
         // Explicitly copy variables from the original to the duplicate
         duplicateEnemy.beatSpeed = originalEnemy.beatSpeed;
         duplicateEnemy.beatTempo = originalEnemy.beatTempo;
-        Debug.Log(duplicateEnemy.beatTempo);
     }
     public void DuplicateBot()
     {
@@ -54,7 +55,6 @@ public class Note_Creator : MonoBehaviour
         // Explicitly copy variables from the original to the duplicate
         duplicateEnemy.beatSpeed = originalEnemy.beatSpeed;
         duplicateEnemy.beatTempo = originalEnemy.beatTempo;
-        Debug.Log(duplicateEnemy.beatTempo);
     }
 
      // Coroutine to spawn notes at specified times
@@ -64,58 +64,82 @@ public class Note_Creator : MonoBehaviour
         {
             // Wait for the specified time before spawning a note
             yield return new WaitForSeconds(noteTime);
-
             // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
             DuplicateTop();
-            Debug.Log("Note spawned at: " + noteTime);
         }
     }
+
+    public IEnumerator Test()
+    {
+        foreach (float noteTime in testTime)
+        {
+            // Wait for the specified time before spawning a note
+            yield return new WaitForSeconds(noteTime);
+            // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
+            DuplicateTop();
+        }
+    }
+
     public IEnumerator SpawnBotNotes()
     {
         foreach (float noteTime in botTimes)
         {
             // Wait for the specified time before spawning a note
             yield return new WaitForSeconds(noteTime);
-
             // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
             DuplicateBot();
-            Debug.Log("Note spawned at: " + noteTime);
         }
     }
 
     void LoadNoteTimes()
     {
-    string[] lines = TopnoteTimesFile.text.Split('\n');
+        // Eventually Add Code here that Changes offset based on Speed Settings
+        offset = 1.58f;
+        string[] lines = TopnoteTimesFile.text.Split('\n');
 
-    foreach (string line in lines)
-    {
-        if (float.TryParse(line.Trim(), out float time))
+        foreach (string line in lines)
         {
-            topTimes.Add(time);
+            if (float.TryParse(line.Trim(), out float time))
+            {
+                topTimes.Add(time);
+            }
         }
-    }
     
-    lines = BotnoteTimesFile.text.Split('\n');
+        lines = BotnoteTimesFile.text.Split('\n');
 
-    foreach (string line in lines)
-    {
+        foreach (string line in lines)
+        {
         if (float.TryParse(line.Trim(), out float time))
-        {
-            botTimes.Add(time);
+            {
+                botTimes.Add(time);
+            }
         }
-    }
-    }
 
-     public IEnumerator TestNotes()
-    {
-        foreach (float noteTime in testTime)
-        {
-            // Wait for the specified time before spawning a note
-            yield return new WaitForSeconds(noteTime);
-
-            // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
-            DuplicateBot();
-            Debug.Log("Note spawned at: " + noteTime);
+        // Change Times to Fit
+        float temp = topTimes[1] - offset;
+        for(int i = 0; i < topTimes.Count; i++){
+            topTimes[i] -= offset;
+            if(i == 1){
+                topTimes[i] = topTimes[i] - topTimes[i-1];
+            }
+            if(i > 1){
+                float save = topTimes[i];
+                topTimes[i] = topTimes[i] - temp;
+                temp = save;
+            }
         }
+        temp = botTimes[1] - offset;
+        for(int i = 0; i < botTimes.Count; i++){
+            botTimes[i] -= offset;
+            if(i == 1){
+                botTimes[i] = botTimes[i] - botTimes[i-1];
+            }
+            if(i > 1){
+                float save = botTimes[i];
+                botTimes[i] = botTimes[i] - temp;
+                temp = save;
+            }
+        }
+        Debug.Log("Complete Change");
     }
 }

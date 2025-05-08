@@ -14,6 +14,8 @@ public class Song_Manager : MonoBehaviour
     public int notesHit = 0;
     public int notesMissed = 0;
     public TextMeshProUGUI comboText;
+    public Note_Object topEnemy;
+    public Note_Object botEnemy;
 
     public Note_Creator creator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,7 +35,11 @@ public class Song_Manager : MonoBehaviour
                 BS_Ground.hasStarted = true;
                 BS_Fly.hasStarted = true;
                 song.Play();
-                StartCoroutine(creator.TestNotes());
+                topEnemy.gameObject.SetActive(false);
+                botEnemy.gameObject.SetActive(false);
+                topEnemy.start();
+                botEnemy.start();
+                //StartCoroutine(creator.Test());
                 StartCoroutine(creator.SpawnTopNotes());
                 StartCoroutine(creator.SpawnBotNotes());
             }
@@ -51,4 +57,6 @@ public class Song_Manager : MonoBehaviour
         combo = 0;
         notesMissed++;
     }
+
+
 }

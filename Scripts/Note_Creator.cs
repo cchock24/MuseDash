@@ -17,9 +17,12 @@ public class Note_Creator : MonoBehaviour
     public TextAsset TopnoteTimesFile;
     public TextAsset BotnoteTimesFile;
     public float offset;
+    public NoSpam check;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        TopnoteTimesFile = Resources.Load<TextAsset>(StaticData.upMap);
+        BotnoteTimesFile = Resources.Load<TextAsset>(StaticData.downMap);
         LoadNoteTimes();
     }
 
@@ -34,8 +37,10 @@ public class Note_Creator : MonoBehaviour
 
     public void DuplicateTop()
     {
+        check.start = true;
         GameObject duplicate = Instantiate(topEnemy, vectorTop, Quaternion.identity);
         duplicate.SetActive(true);
+        check.RegisterNote(duplicate);
         // Access the original and the clone's Enemy components
         Beat_Scroller originalEnemy = topEnemy.GetComponent<Beat_Scroller>();
         Beat_Scroller duplicateEnemy = duplicate.GetComponent<Beat_Scroller>();
@@ -46,8 +51,10 @@ public class Note_Creator : MonoBehaviour
     }
     public void DuplicateBot()
     {
+        check.start = true;
         GameObject duplicate = Instantiate(botEnemy, vectorBot, Quaternion.identity);
          duplicate.SetActive(true);
+         check.RegisterNote(duplicate);
         // Access the original and the clone's Enemy components
         Beat_Scroller originalEnemy = botEnemy.GetComponent<Beat_Scroller>();
         Beat_Scroller duplicateEnemy = duplicate.GetComponent<Beat_Scroller>();
@@ -143,3 +150,5 @@ public class Note_Creator : MonoBehaviour
         Debug.Log("Complete Change");
     }
 }
+
+

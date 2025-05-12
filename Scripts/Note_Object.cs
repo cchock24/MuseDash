@@ -7,6 +7,8 @@ public class Note_Object : MonoBehaviour
     public bool canBePressed;
     public KeyCode downKey;
     public KeyCode leftKey;
+
+    public NoSpam check;
     public bool started = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,16 +20,10 @@ public class Note_Object : MonoBehaviour
     void Update()
     {
         exitScreen();
-        if(Input.GetKeyDown(downKey) || Input.GetKeyDown(leftKey)){
-            if(!this.canBePressed){
-                Debug.Log("No Note");
-                //Song_Manager.instance.NoteMiss();
-            }
-        }
-     
         HandleNotePress(leftKey);   
         HandleNotePress(downKey);
     }
+
 
     private void HandleNotePress(KeyCode key)
     {
@@ -39,6 +35,7 @@ public class Note_Object : MonoBehaviour
                 GameObject effect = Instantiate(onCollectEffect, transform.position, transform.rotation); // Instantiate effect
                 Destroy(effect, 2f); // Destroy effect after 2 seconds
                 Song_Manager.instance.NoteHit();
+                check.deleteLead();
             }
         }
     }
@@ -57,7 +54,8 @@ private void OnTriggerExit2D(Collider2D other)
     }
 private void exitScreen(){
     if(gameObject.transform.position.x <= -7.76){
-       Destroy(gameObject);
+        Destroy(gameObject);
+        check.deleteLead();
         Song_Manager.instance.NoteMiss();
     }
 }

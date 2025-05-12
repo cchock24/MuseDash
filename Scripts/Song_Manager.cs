@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using System.IO;
 
 public class Song_Manager : MonoBehaviour
 {
@@ -10,9 +12,9 @@ public class Song_Manager : MonoBehaviour
     public Beat_Scroller BS_Ground;
     public Beat_Scroller BS_Fly;
     public static Song_Manager instance;
-    public int combo = 0;
-    public int notesHit = 0;
-    public int notesMissed = 0;
+    public static int combo = 0;
+    public static int notesHit = 0;
+    public static int notesMissed = 0;
     public TextMeshProUGUI comboText;
     public Note_Object topEnemy;
     public Note_Object botEnemy;
@@ -21,6 +23,7 @@ public class Song_Manager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        song.clip = Resources.Load<AudioClip>(StaticData.song);
         instance = this;
         comboText.text = "Combo: " + 0;
         song.Stop();
@@ -44,6 +47,13 @@ public class Song_Manager : MonoBehaviour
                 StartCoroutine(creator.SpawnBotNotes());
             }
         }
+        /*
+        if (!song.isPlaying && startPlaying)
+        {
+            Debug.Log("Music has ended!");
+            SceneManager.LoadScene("EndScreen");
+        }
+        */
     }
 
     public void NoteHit(){

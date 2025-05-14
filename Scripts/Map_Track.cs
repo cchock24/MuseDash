@@ -27,6 +27,7 @@ public class Map_Track : MonoBehaviour
             Debug.Log("Timer Started!");
         }
 
+        // When Left and Right Arrow are Pressed add input into List
         if (timerStarted)
         {
             timer += Time.deltaTime;
@@ -39,12 +40,14 @@ public class Map_Track : MonoBehaviour
            }
         }
 
+        // When F is pressed write List into a txt file
         if(Input.GetKeyDown(KeyCode.F)){
              WriteArrayToFile(filePathTop, topTime);
              WriteArrayToFile(filePathBot, botTime);
         }
     }
 
+    // Function to write to file made with help from ChatGPT
      void WriteArrayToFile(string path, List<float> list)
     {
         try

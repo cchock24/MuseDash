@@ -9,6 +9,7 @@ public class getValue : MonoBehaviour
 
     public void OnSongSelected()
     {
+        //Static Variables to pass among different scenes
         StaticData.song = songFileName;
         StaticData.upMap = up;
         StaticData.downMap = down;

@@ -1,3 +1,4 @@
+// Inspired by GamesPlusJames Youtube
 using UnityEngine;
 
 public class Beat_Scroller : MonoBehaviour
@@ -17,6 +18,7 @@ public class Beat_Scroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // When the Game starts moves the notes across the screen
         if(hasStarted){
             transform.position -= new Vector3(actualSpeed* Time.deltaTime, 0f, 0f);
             currentPosition = transform.position;

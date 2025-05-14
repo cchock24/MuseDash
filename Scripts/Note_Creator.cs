@@ -37,10 +37,13 @@ public class Note_Creator : MonoBehaviour
 
     public void DuplicateTop()
     {
+        // Duplicate Original Note. Makes sure to set the Note Speed correctly
+        // When Note is created add it to NoSpam list and reassign leading note
         check.start = true;
         GameObject duplicate = Instantiate(topEnemy, vectorTop, Quaternion.identity);
         duplicate.SetActive(true);
-        check.RegisterNote(duplicate);
+        check.RegisterNoteTop(duplicate);
+        check.AssignLeadNoteTop();
         // Access the original and the clone's Enemy components
         Beat_Scroller originalEnemy = topEnemy.GetComponent<Beat_Scroller>();
         Beat_Scroller duplicateEnemy = duplicate.GetComponent<Beat_Scroller>();
@@ -54,7 +57,8 @@ public class Note_Creator : MonoBehaviour
         check.start = true;
         GameObject duplicate = Instantiate(botEnemy, vectorBot, Quaternion.identity);
          duplicate.SetActive(true);
-         check.RegisterNote(duplicate);
+         check.RegisterNoteBot(duplicate);
+         check.AssignLeadNoteBot();
         // Access the original and the clone's Enemy components
         Beat_Scroller originalEnemy = botEnemy.GetComponent<Beat_Scroller>();
         Beat_Scroller duplicateEnemy = duplicate.GetComponent<Beat_Scroller>();
@@ -71,18 +75,16 @@ public class Note_Creator : MonoBehaviour
         {
             // Wait for the specified time before spawning a note
             yield return new WaitForSeconds(noteTime);
-            // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
             DuplicateTop();
         }
     }
-
+    // Used for a Test Array of Notes
     public IEnumerator Test()
     {
         foreach (float noteTime in testTime)
         {
             // Wait for the specified time before spawning a note
             yield return new WaitForSeconds(noteTime);
-            // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
             DuplicateTop();
         }
     }
@@ -93,17 +95,18 @@ public class Note_Creator : MonoBehaviour
         {
             // Wait for the specified time before spawning a note
             yield return new WaitForSeconds(noteTime);
-            // Spawn the note at the appropriate position (for simplicity, at (0, 0, 0))
             DuplicateBot();
         }
     }
 
     void LoadNoteTimes()
     {
-        // Eventually Add Code here that Changes offset based on Speed Settings
+        // Offset (time needed to travel from spawn location to hit location)
         offset = 1.58f;
+        // Makes a string array of each line of the txt
         string[] lines = TopnoteTimesFile.text.Split('\n');
 
+        // For Each string get int value add it to List
         foreach (string line in lines)
         {
             if (float.TryParse(line.Trim(), out float time))
@@ -111,7 +114,7 @@ public class Note_Creator : MonoBehaviour
                 topTimes.Add(time);
             }
         }
-    
+
         lines = BotnoteTimesFile.text.Split('\n');
 
         foreach (string line in lines)

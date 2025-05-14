@@ -39,11 +39,13 @@ public class Rin_Change : MonoBehaviour
             if (spriteRenderer != null && jumpSprite != null)
             {
                 Vector3 newPosition = transform.position;
-                // Change the sprite to the new one
+                // Turn of Animator Briefly
                 animator.enabled = false;
+                // Change Sprite
                 spriteRenderer.sprite = jumpSprite;
                 newPosition.y += 4.25f;
                 transform.position = newPosition;
+                // After short time reset sprite
                 StartCoroutine(returnToNormal());
             }
             else
@@ -55,7 +57,6 @@ public class Rin_Change : MonoBehaviour
             // Check if a SpriteRenderer is attached
             if (spriteRenderer != null && kickSprite != null)
             {
-                // Change the sprite to the new one
                 animator.enabled = false;
                 spriteRenderer.sprite = kickSprite;
                 StartCoroutine(returnToNormal());
@@ -68,7 +69,7 @@ public class Rin_Change : MonoBehaviour
     }
 
     public IEnumerator returnToNormal(){
-
+        // After 0.1 seconds reset sprite
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.sprite = originalSprite;
         transform.position = y;

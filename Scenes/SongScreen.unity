@@ -928,7 +928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -313.5, y: -207.5}
+  m_AnchoredPosition: {x: -300.5, y: -207.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &475355358
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -5278,6 +5278,7 @@ MonoBehaviour:
   topEnemy: {fileID: 1429732089}
   botEnemy: {fileID: 2097034828}
   creator: {fileID: 2058338407}
+  check: {fileID: 2058338409}
 --- !u!4 &2058338406
 Transform:
   m_ObjectHideFlags: 0
@@ -5349,8 +5350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7368d106c844050b72d5ba35da194a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leadNote: {fileID: 0}
-  list: []
+  leadNotetop: {fileID: 0}
+  leadNotebot: {fileID: 0}
+  top: []
+  bot: []
   start: 0
 --- !u!1 &2084398589
 GameObject:
